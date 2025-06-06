@@ -14,7 +14,7 @@ $pass = '';
 
 
 $credFile = __DIR__ . '/credentials.txt';
-$routesFile = __DIR__ . '/keeneticRoutesAll.bat';
+$routesFile = __DIR__ . '/routes.bat';
 
 if(!file_exists($routesFile))
 	die('routesFile not found');
