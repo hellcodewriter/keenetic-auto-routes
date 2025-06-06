@@ -8,6 +8,18 @@ set PHP_URL=https://windows.php.net/downloads/releases/php-8.1.32-nts-Win32-vs16
 set PHP_ZIP=php.zip
 set SCRIPT_URL=https://raw.githubusercontent.com/hellcodewriter/keenetic-auto-routes/refs/heads/main/app.php
 set SCRIPT_FILE=%~dp0app.php
+set ROUTES_URI=https://raw.githubusercontent.com/hellcodewriter/keenetic-auto-routes/refs/heads/main/routes.bat
+set ROUTES_FILE=%~dp0routes.bat
+
+net session >nul 2>&1
+cls
+if %errorLevel% neq 0 (
+ echo Run this script as admin!
+ pause
+ exit
+)
+
+dism /online /Enable-Feature /FeatureName:TelnetClient /NoRestart
 
 :: Check php on local
 if exist "%PHP_EXE%" (
@@ -21,8 +33,12 @@ if exist "%PHP_EXE%" (
 )
 
 :: Download php script
-::echo [INFO] Downloading php script...
-::powershell -Command "Invoke-WebRequest -Uri '%SCRIPT_URL%' -OutFile '%SCRIPT_FILE%'"
+echo [INFO] Downloading php script...
+powershell -Command "Invoke-WebRequest -Uri '%SCRIPT_URL%' -OutFile '%SCRIPT_FILE%'"
+
+:: Download routes file
+echo [INFO] Downloading php script...
+powershell -Command "Invoke-WebRequest -Uri '%ROUTES_URI%' -OutFile '%ROUTES_FILE%'"
 
 echo PHP_EXE
 echo [INFO] Launching php script...
