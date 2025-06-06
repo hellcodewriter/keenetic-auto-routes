@@ -11,8 +11,6 @@ $host = '192.168.1.1';
 $port = 23;
 $user = '';
 $pass = '';
-
-
 $credFile = __DIR__ . '/credentials.txt';
 $routesFile = __DIR__ . '/routes.bat';
 
