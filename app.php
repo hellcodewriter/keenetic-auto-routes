@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set("Europe/Moscow");
-set_time_limit(120);
-ini_set('max_execution_time', 120);
+set_time_limit(0);
+ini_set('max_execution_time', 0);
 
 $timeout = 5;
 ini_set('default_socket_timeout', $timeout);
