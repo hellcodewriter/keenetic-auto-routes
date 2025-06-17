@@ -1,4 +1,5 @@
 @echo off
+title Keenetic routes auto-update
 setlocal enabledelayedexpansion
 
 :: cfg
@@ -11,12 +12,15 @@ set SCRIPT_FILE=%~dp0app.php
 set ROUTES_URI=https://raw.githubusercontent.com/hellcodewriter/keenetic-auto-routes/refs/heads/main/routes.bat
 set ROUTES_FILE=%~dp0routes.bat
 
-net session >nul 2>&1
-cls
-if %errorLevel% neq 0 (
- echo Run this script as admin!
- pause
- exit
+
+@echo off
+:: check admin permissions
+powershell -Command "If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) { exit 1 }"
+
+if %errorlevel%==1 (
+    echo Run this script as admin! (is needed to enable telnet)
+    pause
+    exit
 )
 
 dism /online /Enable-Feature /FeatureName:TelnetClient /NoRestart
