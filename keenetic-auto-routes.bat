@@ -5,20 +5,18 @@ setlocal enabledelayedexpansion
 :: cfg
 set PHP_FOLDER=%~dp0php
 set PHP_EXE=%PHP_FOLDER%\php.exe
-set PHP_URL=https://windows.php.net/downloads/releases/php-8.1.32-nts-Win32-vs16-x64.zip
+set PHP_URL=https://windows.php.net/downloads/releases/archives/php-8.1.32-nts-Win32-vs16-x64.zip
 set PHP_ZIP=php.zip
 set SCRIPT_URL=https://raw.githubusercontent.com/hellcodewriter/keenetic-auto-routes/refs/heads/main/app.php
 set SCRIPT_FILE=%~dp0app.php
 set ROUTES_URI=https://raw.githubusercontent.com/hellcodewriter/keenetic-auto-routes/refs/heads/main/routes.bat
 set ROUTES_FILE=%~dp0routes.bat
 
-
-@echo off
 :: check admin permissions
-powershell -Command "If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) { exit 1 }"
+net session >nul 2>&1
 
-if %errorlevel%==1 (
-    echo Run this script as admin! (is needed to enable telnet)
+if %ERRORLEVEL% NEQ 0 (
+    echo Run this script as admin! - is needed to enable telnet
     pause
     exit
 )
