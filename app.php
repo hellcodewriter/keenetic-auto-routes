@@ -141,7 +141,7 @@ foreach ($lines as $line) {
 }
 
 fwrite($fp, "system configuration save");
-
+sleep(2);
 echo "added routes: {$addedRoutes}\n";
 
 
