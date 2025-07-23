@@ -139,9 +139,12 @@ foreach ($lines as $line) {
 //	}
 	
 }
+echo "\n saving to flash..";
 
 fwrite($fp, "system configuration save");
 sleep(2);
+fwrite($fp, "copy running-config startup-config");
+sleep(3);
 echo "added routes: {$addedRoutes}\n";
 
 
